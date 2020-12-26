@@ -17,15 +17,16 @@ class Item < ApplicationRecord
     validates :payment_id
     validates :prefecture_id
     validates :period_id
-    validates :price, numericality: {less_than_or_equal_to: 9999999, greater_than_or_equal_to: 300, message: "is invalid. Input half-width number within range."}
+    validates :price,
+              numericality: { less_than_or_equal_to: 9_999_999, greater_than_or_equal_to: 300,
+                              message: 'is invalid. Input half-width number within range.' }
   end
-  
-  with_options numericality: {other_than: 0, message: "is invalid. Select status."} do
+
+  with_options numericality: { other_than: 0, message: 'is invalid. Select status.' } do
     validates :category_id
     validates :condition_id
     validates :payment_id
     validates :prefecture_id
     validates :period_id
   end
-
 end
