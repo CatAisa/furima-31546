@@ -126,36 +126,37 @@
     <%= link_to '新規投稿商品', new_item_path, class: "subtitle" %>
     <ul class='item-lists'>
 
-      <% @items.each do |item| %>
-        <li class='list'>
-          <%= link_to "#" do %>
-          <div class='item-img-content'>
-            <%= image_tag item.image, class: "item-img" %>
+      <% unless @items.blank? %>
+        <% @items.each do |item| %>
+          <li class='list'>
+            <%= link_to "#" do %>
+            <div class='item-img-content'>
+              <%= image_tag item.image, class: "item-img" %>
 
-            <% unless item.purchase_record == nil %>
-              <div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div>
-            <% end %>
+              <% unless item.purchase_record == nil %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
 
-          </div>
-          <div class='item-info'>
-            <h3 class='item-name'>
-              <%= item.name %>
-            </h3>
-            <div class='item-price'>
-              <span><%= item.price %>円<br><%= item.payment.name %></span>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.name %>
+              </h3>
+              <div class='item-price'>
+                <span><%= item.price %>円<br><%= item.payment.name %></span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
               </div>
             </div>
-          </div>
-          <% end %>
-        </li>
-      <% end %>
+            <% end %>
+          </li>
+        <% end %>
 
-      <% if @items.blank? %>
+      <% else %>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
