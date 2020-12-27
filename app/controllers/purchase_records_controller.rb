@@ -1,4 +1,4 @@
 class PurchaseRecordsController < ApplicationController
-  def new
+  def index
   end
 end
