@@ -5,9 +5,7 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
-    @purchase_record = @item.purchase_records.new(purchase_record_params)
-    @purchase_record.save
+    @purchase_record = PurchaseRecord.create(purchase_record_params)
   end
 
   private
