@@ -5,9 +5,8 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
-    purchase = PurchaseRecord.new(purchase_params)
-    address = Address.new(address_params(purchase))
-    binding.pry
+    purchase = PurchaseRecord.create(purchase_params)
+    Address.create(address_params(purchase))
   end
 
   private
@@ -16,6 +15,6 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def address_params(purchase)
-    params.permit().merge(purchase_record_id: purchase.id)
+    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(purchase_record_id: purchase.id)
   end
 end
