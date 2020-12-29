@@ -3,11 +3,11 @@ class PurchaseAddress
   attr_accessor :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number
 
   with_options presence: true do
-    validates :postal_code
-    validates :prefecture_id
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Input correctly."}
+    validates :prefecture_id, numericality: {other_than: 0, message: "is invalid. Select status."}
     validates :city
     validates :house_number
-    validates :phone_number
+    validates :phone_number, numericality: {only_integer: true, message: "is invalid. Input half-width numbers."}
   end
 
   def save(user, item)
