@@ -7,8 +7,14 @@ class PurchaseRecordsController < ApplicationController
   def create
     user = current_user
     item = Item.find(params[:item_id])
+    @item = item
     @purchase_address = PurchaseAddress.new(purchase_address_params)
-    @purchase_address.save(user, item)
+    if @purchase_address.valid?
+      @purchase_address.save(user, item)
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
