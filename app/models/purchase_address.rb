@@ -8,6 +8,7 @@ class PurchaseAddress
     validates :city
     validates :house_number
     validates :phone_number, numericality: {only_integer: true, message: "is invalid. Input half-width numbers."}
+    validates :token
   end
 
   def save(user, item)
