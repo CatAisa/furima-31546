@@ -57,6 +57,16 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include('Phone number is invalid. Input half-width numbers.')
       end
+      it 'phone_numberが英数混合だと購入できないこと' do
+        @purchase.phone_number ='abcd1234567'
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include('Phone number is invalid. Input half-width numbers.')
+      end
+      it 'phone_numberが12桁以上だと購入できないこと' do
+        @purchase.phone_number = '123456789012'
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include('Phone number is invalid. Input number within 11 digits.')
+      end
       it 'tokenが空では購入できないこと' do
         @purchase.token = nil
         @purchase.valid?
