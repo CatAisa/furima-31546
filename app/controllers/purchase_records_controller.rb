@@ -10,7 +10,7 @@ class PurchaseRecordsController < ApplicationController
   def create
     @purchase_address = PurchaseAddress.new(purchase_address_params)
     if @purchase_address.valid?
-      pay_item(@item)
+      pay_item
       @purchase_address.save
       redirect_to root_path
     else
@@ -25,10 +25,10 @@ class PurchaseRecordsController < ApplicationController
                                              :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
-  def pay_item(item)
+  def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: item.price,
+      amount: @item.price,
       card: purchase_address_params[:token],
       currency: 'jpy'
     )
