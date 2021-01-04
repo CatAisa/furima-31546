@@ -8,6 +8,7 @@ class PurchaseAddress
     validates :city
     validates :house_number
     validates :phone_number, numericality: { only_integer: true, message: 'is invalid. Input half-width numbers.' }
+    validates :phone_number, length: {maximum: 11, message: 'is invalid. Input number within 11 digits.'}
     validates :token
   end
 
