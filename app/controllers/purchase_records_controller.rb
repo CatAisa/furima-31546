@@ -8,12 +8,10 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
-    user = current_user
-    item = @item
     @purchase_address = PurchaseAddress.new(purchase_address_params)
     if @purchase_address.valid?
-      pay_item(item)
-      @purchase_address.save(user, item)
+      pay_item(@item)
+      @purchase_address.save
       redirect_to root_path
     else
       render :index
@@ -24,7 +22,7 @@ class PurchaseRecordsController < ApplicationController
 
   def purchase_address_params
     params.require(:purchase_address).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name,
-                                             :phone_number).merge(token: params[:token])
+                                             :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
   def pay_item(item)
