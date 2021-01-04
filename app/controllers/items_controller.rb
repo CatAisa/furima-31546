@@ -54,6 +54,6 @@ class ItemsController < ApplicationController
   end
 
   def user_judge
-    redirect_to root_path if @item.user.id != current_user.id
+    redirect_to root_path if !@item.purchase_record.nil? || @item.user.id != current_user.id
   end
 end
