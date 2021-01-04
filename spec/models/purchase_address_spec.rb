@@ -58,7 +58,7 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase.errors.full_messages).to include('Phone number is invalid. Input half-width numbers.')
       end
       it 'phone_numberが英数混合だと購入できないこと' do
-        @purchase.phone_number ='abcd1234567'
+        @purchase.phone_number = 'abcd1234567'
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include('Phone number is invalid. Input half-width numbers.')
       end
