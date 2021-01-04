@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:show, :destroy]
+  before_action :user_judge, only: :destroy
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -39,5 +40,9 @@ class ItemsController < ApplicationController
 
   def item_find
     @item = Item.find(params[:id])
+  end
+
+  def user_judge
+    redirect_to root_path if @item.user.id != current_user.id
   end
 end
